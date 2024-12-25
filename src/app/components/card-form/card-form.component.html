@@ -1,0 +1,50 @@
+<div class="card-form">
+  <h2>Card Information</h2>
+  <form [formGroup]="cardForm" (ngSubmit)="onSubmit()">
+    <div class="form-row">
+      <div class="input-container">
+        <label for="cardNumber">Card Number</label>
+        <input
+          id="cardNumber"
+          formControlName="cardNumber"
+          type="text"
+          placeholder="Enter card number"
+        />
+      </div>
+
+      <div class="input-container">
+        <label for="amountOwed">Amount Owed</label>
+        <input
+          id="amountOwed"
+          formControlName="amountOwed"
+          type="number"
+          placeholder="Amount you owe"
+        />
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="input-container">
+        <label for="minPayment">Minimum Payment</label>
+        <input
+          id="minPayment"
+          formControlName="minPayment"
+          type="number"
+          placeholder="Minimum payment"
+        />
+      </div>
+
+      <div class="input-container">
+        <label for="cardType">Card Type</label>
+        <input id="cardType" [value]="cardType" disabled />
+      </div>
+    </div>
+
+    <div class="input-container">
+      <label for="cardName">Card Name (Bank)</label>
+      <input id="cardName" [value]="cardName" disabled />
+    </div>
+
+    <button type="submit" [disabled]="!cardForm.valid">Submit</button>
+  </form>
+</div>
