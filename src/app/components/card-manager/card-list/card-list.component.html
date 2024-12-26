@@ -1,0 +1,13 @@
+<div class="card-list">
+  <div class="cards">
+    <div *ngFor="let card of cards" class="card-item">
+      <div class="card-info">
+        <h3>{{ card.cardName }}</h3>
+        <p>Amount Owed: ${{ card.amountOwed | number : "1.2-2" }}</p>
+      </div>
+      <button class="detail-button" (click)="onDetailClick(card)">
+        Details
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,4 @@
+<div class="card-manager">
+  <app-card-form (formSubmitted)="onFormSubmit($event)"></app-card-form>
+  <app-card-list *ngIf="showCardList" [cards]="cards"></app-card-list>
+</div>

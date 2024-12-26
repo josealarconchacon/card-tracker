@@ -1,0 +1,9 @@
+.card-manager {
+  display: flex;
+  gap: 5px;
+  align-items: flex-start;
+}
+
+.card-manager > * {
+  flex: 1;
+}

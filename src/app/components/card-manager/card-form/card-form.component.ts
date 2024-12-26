@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { CardDetectorService } from '../../service/card-detector.service';
+import { CardDetectorService } from '../../../service/card-detector.service';
+import { CardList } from '../../../model/card-list-data';
 
 @Component({
   selector: 'app-card-form',
@@ -15,6 +16,8 @@ import { CardDetectorService } from '../../service/card-detector.service';
   styleUrls: ['./card-form.component.css'],
 })
 export class CardFormComponent implements OnInit {
+  @Output() formSubmitted = new EventEmitter<CardList>();
+
   cardForm: FormGroup;
   cardType: string = '';
   cardName: string = '';
@@ -40,14 +43,12 @@ export class CardFormComponent implements OnInit {
 
   onSubmit() {
     if (this.cardForm.valid) {
-      const { cardNumber, amountOwed, minPayment } = this.cardForm.value;
-      console.log('Form Submitted', {
-        cardNumber,
-        amountOwed,
-        minPayment,
-        cardType: this.cardType,
+      const { amountOwed } = this.cardForm.value;
+      const cardData: CardList = {
         cardName: this.cardName,
-      });
+        amountOwed: amountOwed,
+      };
+      this.formSubmitted.emit(cardData);
     }
   }
 }
