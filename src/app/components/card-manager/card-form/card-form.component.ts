@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { CardDetectorService } from '../../../service/card-detector.service';
 import { CardList } from '../../../model/card-list-data';
+import { CardService } from '../../../service/card.service';
 
 @Component({
   selector: 'app-card-form',
@@ -17,24 +18,25 @@ import { CardList } from '../../../model/card-list-data';
 })
 export class CardFormComponent implements OnInit {
   @Output() formSubmitted = new EventEmitter<CardList>();
-
   cardForm: FormGroup;
-  cardType: string = '';
-  cardName: string = '';
+  cardType = '';
+  cardName = '';
 
   constructor(
     private fb: FormBuilder,
-    private cardDetector: CardDetectorService
+    private cardDetector: CardDetectorService,
+    private cardService: CardService
   ) {
     this.cardForm = this.fb.group({
       cardNumber: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
       amountOwed: ['', [Validators.required, Validators.min(1)]],
       minPayment: ['', [Validators.required, Validators.min(1)]],
+      paymentDate: ['', [Validators.required]],
     });
   }
 
   ngOnInit() {
-    this.cardForm.get('cardNumber')?.valueChanges.subscribe((value: string) => {
+    this.cardForm.get('cardNumber')?.valueChanges.subscribe((value) => {
       const { type, bank } = this.cardDetector.detectCardType(value);
       this.cardType = type;
       this.cardName = bank;
@@ -43,12 +45,19 @@ export class CardFormComponent implements OnInit {
 
   onSubmit() {
     if (this.cardForm.valid) {
-      const { amountOwed } = this.cardForm.value;
+      const { cardNumber, amountOwed, minPayment } = this.cardForm.value;
       const cardData: CardList = {
+        id: Date.now().toString(),
         cardName: this.cardName,
-        amountOwed: amountOwed,
+        cardNumber,
+        cardType: this.cardType,
+        amountOwed,
+        minPayment,
+        dueDate: new Date(),
       };
-      this.formSubmitted.emit(cardData);
+      const savedCard = this.cardService.addCard(cardData);
+      this.formSubmitted.emit(savedCard);
+      this.cardForm.reset();
     }
   }
 }

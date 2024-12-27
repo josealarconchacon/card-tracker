@@ -4,6 +4,7 @@ import { CardFormComponent } from '../components/card-manager/card-form/card-for
 import { CardListComponent } from '../components/card-manager/card-list/card-list.component';
 import { CardManagerComponent } from '../components/card-manager/card-manager.component';
 import { CardList } from '../model/card-list-data';
+import { RouterModule } from '@angular/router';
 
 interface Feedback {
   type: string;
@@ -14,7 +15,7 @@ interface Feedback {
 @Component({
   selector: 'app-skills-dashboard',
   standalone: true,
-  imports: [CommonModule, CardListComponent, CardFormComponent],
+  imports: [CommonModule, CardListComponent, CardFormComponent, RouterModule],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })

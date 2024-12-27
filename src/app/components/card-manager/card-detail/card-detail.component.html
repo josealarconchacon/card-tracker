@@ -1,0 +1,24 @@
+<div class="card-detail-overlay" (click)="onOverlayClick($event)">
+  <div class="card-detail-panel">
+    <div class="card-detail-header">
+      <h2>{{ card.cardName }}</h2>
+      <button class="close-button" (click)="onClose()">&times;</button>
+    </div>
+    <div class="card-detail-content">
+      <p><strong>Card Number:</strong> {{ card.cardNumber }}</p>
+      <p><strong>Card Type:</strong> {{ card.cardType }}</p>
+      <p>
+        <strong>Amount Owed:</strong> ${{ card.amountOwed | number : "1.2-2" }}
+      </p>
+      <p>
+        <strong>Minimum Payment:</strong> ${{
+          card.minPayment | number : "1.2-2"
+        }}
+      </p>
+      <p>
+        <strong>Payment Due Date:</strong>
+        {{ card.dueDate | date : "MM/dd/yyyy" }}
+      </p>
+    </div>
+  </div>
+</div>
