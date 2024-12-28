@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { AlertService } from '../service/alert.service';
 
 @Component({
   selector: 'app-custom-alert',
@@ -9,10 +10,12 @@ import { Component, Input } from '@angular/core';
   styleUrl: './custom-alert.component.css',
 })
 export class CustomAlertComponent {
-  @Input() message: string | null = null;
-  @Input() alertType: 'success' | 'error' | 'warning' = 'error';
+  alert: {
+    message: string;
+    type: 'success' | 'error' | 'warning' | null;
+  } | null = null;
 
-  closeAlert() {
-    this.message = null;
+  constructor(private alertService: AlertService) {
+    this.alertService.alert$.subscribe((alert) => (this.alert = alert));
   }
 }

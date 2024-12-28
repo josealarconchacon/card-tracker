@@ -16,7 +16,7 @@ export class CardListComponent {
   alertMessage: string | null = null;
   alertType: 'success' | 'error' | 'warning' = 'error';
   currentPage = 1;
-  itemsPerPage = 4;
+  itemsPerPage = 3;
 
   get paginatedCards() {
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
@@ -28,16 +28,14 @@ export class CardListComponent {
   }
 
   get totalPagesArray() {
-    return new Array(this.totalPages);
+    return Array.from({ length: this.totalPages }, (_, i) => i + 1);
   }
 
   navigatePage(direction: number) {
-    this.currentPage += direction;
-    if (this.currentPage < 1) {
-      this.currentPage = 1;
-    } else if (this.currentPage > this.totalPages) {
-      this.currentPage = this.totalPages;
-    }
+    this.currentPage = Math.min(
+      Math.max(this.currentPage + direction, 1),
+      this.totalPages
+    );
   }
 
   goToPage(page: number) {
@@ -52,10 +50,14 @@ export class CardListComponent {
   closeDetail() {
     this.selectedCard = null;
   }
-  deleteCard(cardId: number) {
+  handleDeleteCard(cardId: number) {
     this.cards = this.cards.filter((card) => card.id !== cardId.toString());
+    if (this.paginatedCards.length === 0 && this.currentPage > 1) {
+      this.currentPage -= 1;
+    }
   }
+
   trackById(index: number, card: CardList): string {
-    return card.id;
+    return card.id.toString();
   }
 }

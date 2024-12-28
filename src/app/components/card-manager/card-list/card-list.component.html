@@ -48,7 +48,6 @@
     *ngIf="selectedCard"
     [card]="selectedCard"
     (close)="closeDetail()"
-    (deleteCardEvent)="deleteCard($event)"
-  >
-  </app-card-detail>
+    (deleteCardEvent)="handleDeleteCard($event)"
+  ></app-card-detail>
 </div>
