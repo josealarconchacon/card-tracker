@@ -11,12 +11,12 @@ export class CardService {
 
   addCard(card: CardList) {
     const currentCards = this.cards.getValue();
-    const cardWithId = { ...card, id: Date.now().toString() };
+    const cardWithId = { ...card, id: Date.now() };
     this.cards.next([...currentCards, cardWithId]);
     return cardWithId;
   }
 
   getCardById(id: string) {
-    return this.cards.getValue().find((card) => card.id === id);
+    return this.cards.getValue().find((card) => card.id === Number(id));
   }
 }

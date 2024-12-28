@@ -51,3 +51,9 @@
     (deleteCardEvent)="handleDeleteCard($event)"
   ></app-card-detail>
 </div>
+
+<div *ngFor="let card of cards">
+  <div *ngIf="card.paymentDueDate" class="notification">
+    Reminder: Payment for {{ card.cardName }} is due tomorrow!
+  </div>
+</div>

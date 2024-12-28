@@ -1,5 +1,5 @@
 export interface CardFormData {
-  cardNumber: string;
+  cardNumber: number;
   amountOwed: number;
   minPayment: number;
 }

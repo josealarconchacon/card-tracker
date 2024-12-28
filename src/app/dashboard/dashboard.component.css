@@ -55,6 +55,7 @@
 
     .dropdown-content {
       position: absolute;
+      text-align: left;
       top: 100%;
       left: 0;
       width: 100%;

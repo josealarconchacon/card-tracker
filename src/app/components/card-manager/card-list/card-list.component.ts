@@ -1,22 +1,41 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CardList } from '../../../model/card-list-data';
 import { CommonModule } from '@angular/common';
 import { CardDetailComponent } from '../card-detail/card-detail.component';
-import { CustomAlertComponent } from '../../../share/custom-alert/custom-alert.component';
 @Component({
   selector: 'app-card-list',
   standalone: true,
-  imports: [CommonModule, CardDetailComponent, CustomAlertComponent],
+  imports: [CommonModule, CardDetailComponent],
   templateUrl: './card-list.component.html',
   styleUrls: ['./card-list.component.css'],
 })
-export class CardListComponent {
+export class CardListComponent implements OnInit {
   @Input() cards: CardList[] = [];
   selectedCard: CardList | null = null;
-  alertMessage: string | null = null;
-  alertType: 'success' | 'error' | 'warning' = 'error';
   currentPage = 1;
   itemsPerPage = 3;
+
+  ngOnInit() {
+    // new method
+    this.cards.forEach((card) => {
+      if (card.paymentDueDate) {
+        this.showDueReminder(card);
+      }
+    });
+  }
+
+  // Show a reminder if payment is due tomorrow
+  showDueReminder(card: CardList) {
+    // new method
+    const dueDate = card.paymentDueDate ? new Date(card.paymentDueDate) : null;
+    const today = new Date();
+    const tomorrow = new Date();
+    tomorrow.setDate(today.getDate() + 1);
+
+    if (dueDate && dueDate.toDateString() === tomorrow.toDateString()) {
+      alert(`Reminder: Your payment for ${card.cardName} is due tomorrow!`);
+    }
+  }
 
   get paginatedCards() {
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
@@ -51,7 +70,7 @@ export class CardListComponent {
     this.selectedCard = null;
   }
   handleDeleteCard(cardId: number) {
-    this.cards = this.cards.filter((card) => card.id !== cardId.toString());
+    this.cards = this.cards.filter((card) => card.id !== cardId);
     if (this.paginatedCards.length === 0 && this.currentPage > 1) {
       this.currentPage -= 1;
     }

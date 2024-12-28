@@ -47,7 +47,7 @@ export class CardFormComponent implements OnInit {
     if (this.cardForm.valid) {
       const { cardNumber, amountOwed, minPayment } = this.cardForm.value;
       const cardData: CardList = {
-        id: Date.now().toString(),
+        id: Number(Date.now()),
         cardName: this.cardName,
         cardNumber,
         cardType: this.cardType,
