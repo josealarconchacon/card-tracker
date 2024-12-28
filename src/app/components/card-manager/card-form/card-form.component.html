@@ -1,33 +1,62 @@
-<div class="card-form">
-  <form [formGroup]="cardForm" (ngSubmit)="onSubmit()">
+<div class="card-form-container">
+  <form class="card-form" [formGroup]="cardForm" (ngSubmit)="onSubmit()">
+    <div class="form-header">
+      <h2>Card Details</h2>
+      <p>Fill out the form below to update your card information.</p>
+    </div>
+
     <div class="form-row">
       <div class="input-container">
         <label for="cardNumber">Card Number</label>
-        <input id="cardNumber" formControlName="cardNumber" type="text" />
+        <input
+          id="cardNumber"
+          formControlName="cardNumber"
+          type="text"
+          placeholder="XXXX-XXXX-XXXX-XXXX"
+        />
       </div>
       <div class="input-container">
         <label for="amountOwed">Amount Owed</label>
-        <input id="amountOwed" formControlName="amountOwed" type="number" />
+        <input
+          id="amountOwed"
+          formControlName="amountOwed"
+          type="number"
+          placeholder="$0.00"
+        />
       </div>
     </div>
+
     <div class="form-row">
       <div class="input-container">
         <label for="minPayment">Minimum Payment</label>
-        <input id="minPayment" formControlName="minPayment" type="number" />
+        <input
+          id="minPayment"
+          formControlName="minPayment"
+          type="number"
+          placeholder="$0.00"
+        />
       </div>
       <div class="input-container">
         <label for="paymentDate">Payment Due Date</label>
         <input id="paymentDate" formControlName="paymentDate" type="date" />
       </div>
+    </div>
+
+    <div class="form-row">
       <div class="input-container">
         <label for="cardType">Card Type</label>
         <input id="cardType" [value]="cardType" disabled />
       </div>
+      <div class="input-container">
+        <label for="cardName">Card Name</label>
+        <input id="cardName" [value]="cardName" disabled />
+      </div>
     </div>
-    <div class="input-container">
-      <label for="cardName">Card Name (Bank)</label>
-      <input id="cardName" [value]="cardName" disabled />
+
+    <div class="form-footer">
+      <button type="submit" [disabled]="!cardForm.valid" class="submit-button">
+        Submit
+      </button>
     </div>
-    <button type="submit" [disabled]="!cardForm.valid">Submit</button>
   </form>
 </div>

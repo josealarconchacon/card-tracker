@@ -1,24 +1,63 @@
 <div class="card-detail-overlay" (click)="onOverlayClick($event)">
-  <div class="card-detail-panel">
+  <div class="card-detail-panel" (click)="$event.stopPropagation()">
     <div class="card-detail-header">
-      <h2>{{ card.cardName }}</h2>
-      <button class="close-button" (click)="onClose()">&times;</button>
+      <div class="header-title">
+        <h2>{{ card.cardName }}</h2>
+        <span class="card-type">{{ card.cardType }}</span>
+      </div>
+      <button class="close-button" (click)="onClose()">&#10005;</button>
     </div>
+
     <div class="card-detail-content">
-      <p><strong>Card Number:</strong> {{ card.cardNumber }}</p>
-      <p><strong>Card Type:</strong> {{ card.cardType }}</p>
-      <p>
-        <strong>Amount Owed:</strong> ${{ card.amountOwed | number : "1.2-2" }}
-      </p>
-      <p>
-        <strong>Minimum Payment:</strong> ${{
-          card.minPayment | number : "1.2-2"
-        }}
-      </p>
-      <p>
-        <strong>Payment Due Date:</strong>
-        {{ card.dueDate | date : "MM/dd/yyyy" }}
-      </p>
+      <div class="info-section">
+        <p>
+          <strong>Card Number:</strong> **** **** ****
+          {{ card.cardNumber | slice : -4 }}
+        </p>
+        <p>
+          <strong>Amount Owed:</strong> ${{
+            card.amountOwed | number : "1.2-2"
+          }}
+        </p>
+        <p>
+          <strong>Minimum Payment:</strong> ${{
+            card.minPayment | number : "1.2-2"
+          }}
+        </p>
+        <p>
+          <strong>Payment Due Date:</strong>
+          {{ card.dueDate | date : "MMM dd, yyyy" }}
+        </p>
+      </div>
+
+      <div class="payment-section">
+        <h3>Make a Payment</h3>
+        <label for="paymentAmount">Enter Amount:</label>
+        <input
+          id="paymentAmount"
+          type="number"
+          [(ngModel)]="paymentAmount"
+          placeholder="Enter payment amount"
+          min="1"
+        />
+        <button class="primary-button" (click)="makePayment()">Pay Now</button>
+      </div>
+
+      <div class="payment-history">
+        <h3>Payment History</h3>
+        <ul>
+          <li *ngFor="let payment of paymentHistory">
+            <span>{{ payment.date | date : "MMM dd, yyyy" }}</span>
+            <span>$ {{ payment.amount | number : "1.2-2" }}</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="actions">
+        <button class="delete-button" (click)="deleteCard(+card.id)">
+          Delete Card
+        </button>
+      </div>
     </div>
   </div>
 </div>

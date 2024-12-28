@@ -1,10 +1,14 @@
 <div class="card-list">
   <div class="cards">
-    <div *ngFor="let card of paginatedCards" class="card-item">
+    <div
+      *ngFor="let card of paginatedCards; trackBy: trackById"
+      class="card-item"
+    >
       <div class="card-info">
         <h3>{{ card.cardName }}</h3>
         <p>Amount Owed: ${{ card.amountOwed | number : "1.2-2" }}</p>
       </div>
+      <span *ngIf="card.amountOwed === 0" class="paid-off-cross">✔</span>
       <button class="detail-button" (click)="onDetailClick(card)">
         Details
       </button>
@@ -14,7 +18,7 @@
   <div class="pagination" *ngIf="totalPages > 1">
     <button
       [disabled]="currentPage === 1"
-      (click)="previousPage()"
+      (click)="navigatePage(-1)"
       class="pagination-button"
     >
       Previous
@@ -22,7 +26,7 @@
 
     <span class="page-numbers">
       <button
-        *ngFor="let page of [].constructor(totalPages); let i = index"
+        *ngFor="let page of totalPagesArray; let i = index"
         (click)="goToPage(i + 1)"
         [class.active]="currentPage === i + 1"
         class="page-number"
@@ -33,7 +37,7 @@
 
     <button
       [disabled]="currentPage === totalPages"
-      (click)="nextPage()"
+      (click)="navigatePage(1)"
       class="pagination-button"
     >
       Next
@@ -44,6 +48,7 @@
     *ngIf="selectedCard"
     [card]="selectedCard"
     (close)="closeDetail()"
+    (deleteCardEvent)="deleteCard($event)"
   >
   </app-card-detail>
 </div>

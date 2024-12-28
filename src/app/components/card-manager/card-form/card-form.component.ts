@@ -57,6 +57,7 @@ export class CardFormComponent implements OnInit {
       };
       const savedCard = this.cardService.addCard(cardData);
       this.formSubmitted.emit(savedCard);
+
       this.cardForm.reset();
     }
   }

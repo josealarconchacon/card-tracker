@@ -1,47 +1,20 @@
-// import { Component, Input } from '@angular/core';
-// import { CardList } from '../../../model/card-list-data';
-// import { CommonModule } from '@angular/common';
-// import { Router } from '@angular/router';
-// import { CardDetailComponent } from '../card-detail/card-detail.component';
-
-// @Component({
-//   selector: 'app-card-list',
-//   standalone: true,
-//   imports: [CommonModule, CardDetailComponent],
-//   templateUrl: './card-list.component.html',
-//   styleUrl: './card-list.component.css',
-// })
-// export class CardListComponent {
-//   @Input() cards: CardList[] = [];
-//   selectedCard: CardList | null = null;
-
-//   onDetailClick(card: CardList) {
-//     this.selectedCard = card;
-//   }
-
-//   closeDetail() {
-//     this.selectedCard = null;
-//   }
-// }
-// card-list.component.ts
 import { Component, Input } from '@angular/core';
 import { CardList } from '../../../model/card-list-data';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
 import { CardDetailComponent } from '../card-detail/card-detail.component';
-
+import { CustomAlertComponent } from '../../../share/custom-alert/custom-alert.component';
 @Component({
   selector: 'app-card-list',
   standalone: true,
-  imports: [CommonModule, CardDetailComponent],
+  imports: [CommonModule, CardDetailComponent, CustomAlertComponent],
   templateUrl: './card-list.component.html',
-  styleUrl: './card-list.component.css',
+  styleUrls: ['./card-list.component.css'],
 })
 export class CardListComponent {
   @Input() cards: CardList[] = [];
   selectedCard: CardList | null = null;
-
-  // Pagination properties
+  alertMessage: string | null = null;
+  alertType: 'success' | 'error' | 'warning' = 'error';
   currentPage = 1;
   itemsPerPage = 4;
 
@@ -54,23 +27,16 @@ export class CardListComponent {
     return Math.ceil(this.cards.length / this.itemsPerPage);
   }
 
-  onDetailClick(card: CardList) {
-    this.selectedCard = card;
+  get totalPagesArray() {
+    return new Array(this.totalPages);
   }
 
-  closeDetail() {
-    this.selectedCard = null;
-  }
-
-  nextPage() {
-    if (this.currentPage < this.totalPages) {
-      this.currentPage++;
-    }
-  }
-
-  previousPage() {
-    if (this.currentPage > 1) {
-      this.currentPage--;
+  navigatePage(direction: number) {
+    this.currentPage += direction;
+    if (this.currentPage < 1) {
+      this.currentPage = 1;
+    } else if (this.currentPage > this.totalPages) {
+      this.currentPage = this.totalPages;
     }
   }
 
@@ -78,5 +44,18 @@ export class CardListComponent {
     if (page >= 1 && page <= this.totalPages) {
       this.currentPage = page;
     }
+  }
+  onDetailClick(card: CardList) {
+    this.selectedCard = card;
+  }
+
+  closeDetail() {
+    this.selectedCard = null;
+  }
+  deleteCard(cardId: number) {
+    this.cards = this.cards.filter((card) => card.id !== cardId.toString());
+  }
+  trackById(index: number, card: CardList): string {
+    return card.id;
   }
 }

@@ -29,9 +29,21 @@ h2 {
   color: #666;
 }
 
+.paid-off {
+  text-decoration: line-through;
+  color: gray;
+}
+
+.paid-off-cross {
+  font-size: 16px;
+  color: green;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
 .detail-button {
   padding: 8px 16px;
-  background-color: #00b5cc;
+  background-color: #0070f3;
   color: white;
   border: none;
   border-radius: 4px;
@@ -40,10 +52,9 @@ h2 {
 }
 
 .detail-button:hover {
-  background-color: #008c99;
+  background-color: #0050ac;
 }
 
-/* Modern Custom Pagination Styles */
 .pagination {
   display: flex;
   justify-content: center;

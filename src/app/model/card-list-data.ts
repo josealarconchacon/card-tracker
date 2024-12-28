@@ -6,4 +6,5 @@ export interface CardList {
   amountOwed: number;
   minPayment: number;
   dueDate: Date;
+  paymentHistory?: { amount: number; date: Date }[];
 }

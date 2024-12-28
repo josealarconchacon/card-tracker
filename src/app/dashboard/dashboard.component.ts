@@ -20,31 +20,14 @@ interface Feedback {
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent {
-  feedbacks: Feedback[] = [
-    {
-      type: 'Manager Feedback',
-      timeAgo: '5m ago',
-      message:
-        'Great leadership today during the team meeting. Keep up the good work!',
-    },
-    {
-      type: 'Team Member Feedback',
-      timeAgo: '1hr ago',
-      message: "You've really improved in your problem-solving abilities!",
-    },
-  ];
-
   currentLevel = 5;
   showCardList = false;
   cards: CardList[] = [];
 
-  startNewTask() {
-    console.log('Starting new task...');
-  }
-
   startTask(taskTitle: string) {
     console.log(`Starting task: ${taskTitle}`);
   }
+
   onFormSubmit(cardListData: CardList) {
     this.cards.push(cardListData);
     this.showCardList = true;
