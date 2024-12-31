@@ -1,27 +1,38 @@
-# CardTracker
+# Card & Loans Tracker
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.5.
+A **proof-of-concept application** designed to help users efficiently track and manage their expenses, including card payments and loans. Stay organized and gain valuable insights into your financial activities with ease.
 
-## Development server
+---
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Features
 
-## Code scaffolding
+- **Expense Tracking**: Monitor and manage your card payments and loan details.
+- **User-Friendly Interface**: Clean and intuitive design for seamless navigation.
+- **More Features** will be implemented.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+---
 
-## Build
+## Screenshots
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Dashboard
 
-## Running unit tests
+<div style="display: flex; gap: 16px; justify-content: center;">
+  <img src="https://github.com/user-attachments/assets/7ef5c427-65d3-4081-89ed-adae859562ea" alt="Dashboard Overview" width="45%" height="auto"/>
+  <img src="https://github.com/user-attachments/assets/60088b95-9c49-4e26-987f-bf1783d403b5" alt="Loan Tracker" width="7%" height="auto"/>
+</div>
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Loans Details
 
-## Running end-to-end tests
+<div style="display: flex; gap: 16px; justify-content: center;">
+  <img src="https://github.com/user-attachments/assets/e5a1be1a-ba0c-4862-b4d7-71291e7353ed" alt="Expense Details" width="45%" height="auto"/>
+  <img src="https://github.com/user-attachments/assets/175f932e-3f8f-4001-ba6d-48a2cd607733" alt="Summary View" width="10.1%" height="auto"/>
+</div>
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+---
 
-## Further help
+## Installation
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/josealarconchacon/card-tracker.git
+   cd card-tracker
