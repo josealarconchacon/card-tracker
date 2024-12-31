@@ -18,10 +18,29 @@ h2 {
   border-radius: 6px;
   margin-bottom: 10px;
 }
+.card-info {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+}
 
-.card-info h3 {
-  margin: 0 0 5px 0;
-  color: #333;
+.card-name-section {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  width: 100%;
+}
+.card-details {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex: 1;
+}
+
+.card-info img {
+  width: 40px;
+  height: 30px;
+  object-fit: contain;
 }
 
 .card-info p {
@@ -125,6 +144,18 @@ h2 {
   border: none;
 }
 
+@media (max-width: 768px) {
+  .card-info {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .card-info p {
+    width: 100%;
+    margin: 5px 0;
+  }
+}
+
 @media (max-width: 600px) {
   .pagination {
     flex-direction: column;
@@ -138,5 +169,16 @@ h2 {
     border-bottom: 2px solid #e0e0e0;
     padding: 15px 0;
     margin: 0;
+  }
+}
+@media (max-width: 480px) {
+  .card-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .detail-button {
+    margin-top: 10px;
+    width: 100%;
   }
 }

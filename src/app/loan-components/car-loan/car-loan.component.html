@@ -1,0 +1,169 @@
+<div class="loan-application-container">
+  <mat-card class="application-card">
+    <mat-card-header class="card-header">
+      <mat-card-title class="title">Apply for a Card Loan</mat-card-title>
+      <mat-card-subtitle class="subtitle">
+        Instant approval with flexible terms. Apply now!
+      </mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form
+        #carLoanForm="ngForm"
+        (ngSubmit)="onSubmit(carLoanForm)"
+        class="loan-form"
+      >
+        <div class="form-section">
+          <h3 class="section-title">Personal Information</h3>
+          <div class="form-fields">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Full Name</mat-label>
+              <input
+                matInput
+                type="text"
+                name="fullName"
+                [(ngModel)]="fullName"
+                placeholder="Enter your full name"
+                required
+              />
+              <mat-hint>Example: John Doe</mat-hint>
+              <mat-error
+                *ngIf="
+                  carLoanForm.controls['fullName']?.touched &&
+                  carLoanForm.controls['fullName']?.invalid
+                "
+              >
+                Full Name is required.
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="half-width">
+              <mat-label>Date of Birth</mat-label>
+              <input
+                matInput
+                [matDatepicker]="dobPicker"
+                name="dob"
+                [(ngModel)]="dob"
+                placeholder="MM/DD/YYYY"
+                required
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="dobPicker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #dobPicker></mat-datepicker>
+              <mat-error
+                *ngIf="
+                  carLoanForm.controls['dob']?.touched &&
+                  carLoanForm.controls['dob']?.invalid
+                "
+              >
+                Date of Birth is required.
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="half-width">
+              <mat-label>Social Security Number</mat-label>
+              <input
+                matInput
+                type="text"
+                name="ssn"
+                [(ngModel)]="ssn"
+                placeholder="XXX-XX-XXXX"
+                required
+              />
+              <mat-error
+                *ngIf="
+                  carLoanForm.controls['ssn']?.touched &&
+                  carLoanForm.controls['ssn']?.invalid
+                "
+              >
+                SSN is required.
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h3 class="section-title">Employment Information</h3>
+          <div class="form-fields">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Current Employer</mat-label>
+              <input
+                matInput
+                type="text"
+                name="employer"
+                [(ngModel)]="employer"
+                placeholder="Enter your employer's name"
+                required
+              />
+              <mat-error
+                *ngIf="
+                  carLoanForm.controls['employer']?.touched &&
+                  carLoanForm.controls['employer']?.invalid
+                "
+              >
+                Current Employer is required.
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="half-width">
+              <mat-label>Job Title</mat-label>
+              <input
+                matInput
+                type="text"
+                name="jobTitle"
+                [(ngModel)]="jobTitle"
+                placeholder="Enter your job title"
+                required
+              />
+              <mat-error
+                *ngIf="
+                  carLoanForm.controls['jobTitle']?.touched &&
+                  carLoanForm.controls['jobTitle']?.invalid
+                "
+              >
+                Job Title is required.
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="half-width">
+              <mat-label>Length of Employment</mat-label>
+              <input
+                matInput
+                type="text"
+                name="lengthOfEmployment"
+                [(ngModel)]="lengthOfEmployment"
+                placeholder="e.g., 3 years"
+                required
+              />
+              <mat-error
+                *ngIf="
+                  carLoanForm.controls['lengthOfEmployment']?.touched &&
+                  carLoanForm.controls['lengthOfEmployment']?.invalid
+                "
+              >
+                Length of Employment is required.
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button
+            mat-raised-button
+            color="primary"
+            type="submit"
+            [disabled]="carLoanForm.invalid"
+            class="submit-btn"
+          >
+            Submit Application
+          </button>
+          <button mat-stroked-button type="reset" class="reset-btn">
+            Clear
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -1,0 +1,71 @@
+<div class="loan-container">
+  <div class="header-section">
+    <h1 class="main-heading">Choose a loan that works for you</h1>
+    <p class="subtitle">
+      Compare our loan options and find the right fit for your needs
+    </p>
+  </div>
+
+  <div class="loan-grid">
+    <button
+      *ngFor="let loan of loanTypes"
+      (click)="selectLoan(loan)"
+      class="loan-option"
+      [class.selected]="selectedLoan?.id === loan.id"
+    >
+      <div class="loan-content">
+        <span class="loan-icon">{{ loan.icon }}</span>
+        <div class="loan-details">
+          <h2 class="loan-name">{{ loan.name }}</h2>
+          <p class="loan-description">{{ loan.description }}</p>
+        </div>
+        <i class="chevron-right"></i>
+      </div>
+      <div class="highlight-bar"></div>
+    </button>
+  </div>
+
+  <div
+    class="side-panel-overlay"
+    *ngIf="isPanelOpen"
+    (click)="closePanel()"
+  ></div>
+
+  <div class="side-panel" *ngIf="isPanelOpen" @slideInOut>
+    <div class="side-panel-header">
+      <button class="close-button" (click)="closePanel()">&times;</button>
+      <div class="panel-loan-info">
+        <span class="panel-loan-icon">{{ selectedLoan?.icon }}</span>
+        <h2>{{ selectedLoan?.name }}</h2>
+      </div>
+    </div>
+
+    <div class="side-panel-content">
+      <ng-container *ngComponentOutlet="selectedLoan?.component"></ng-container>
+    </div>
+  </div>
+
+  <div class="info-section">
+    <h3 class="info-heading">Why choose our loans?</h3>
+    <div class="benefits-grid">
+      <div class="benefit">
+        <h4 class="benefit-title">Competitive Rates</h4>
+        <p class="benefit-description">
+          Get access to some of the most competitive rates in the market
+        </p>
+      </div>
+      <div class="benefit">
+        <h4 class="benefit-title">Quick Decisions</h4>
+        <p class="benefit-description">
+          Most applications are reviewed and decided within minutes
+        </p>
+      </div>
+      <div class="benefit">
+        <h4 class="benefit-title">Expert Support</h4>
+        <p class="benefit-description">
+          Our lending specialists are here to help every step of the way
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

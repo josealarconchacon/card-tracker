@@ -54,6 +54,7 @@ export class CardFormComponent implements OnInit {
         amountOwed,
         minPayment,
         dueDate: new Date(),
+        image: '',
       };
       const savedCard = this.cardService.addCard(cardData);
       this.formSubmitted.emit(savedCard);

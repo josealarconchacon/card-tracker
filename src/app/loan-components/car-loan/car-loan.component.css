@@ -1,0 +1,90 @@
+.loan-application-container {
+  display: flex;
+  justify-content: center;
+}
+
+.application-card {
+  width: 100%;
+  max-width: 800px;
+  min-height: 600px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-header {
+  background: linear-gradient(135deg, #0066cc, #003d99);
+  color: #ffffff;
+  text-align: center;
+  padding: 24px;
+}
+
+.title {
+  text-align: left;
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.subtitle {
+  text-align: left;
+  font-size: 1.1rem;
+  margin-top: 8px;
+}
+
+.form-section {
+  margin-top: 24px;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  font-size: 1.3rem;
+  color: #0066cc;
+  margin-bottom: 16px;
+  gap: 10px;
+}
+
+.form-fields {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.full-width {
+  flex: 1 1 100%;
+}
+
+.half-width {
+  flex: 1 1 48%;
+}
+
+.submit-btn {
+  background-color: #0066cc;
+  color: #ffffff;
+  width: 100%;
+  font-size: 1rem;
+  border-radius: 6px;
+  padding: 12px 0;
+}
+
+.submit-btn:hover {
+  background-color: #005bb5;
+}
+
+.reset-btn {
+  color: #0066cc;
+  font-size: 1rem;
+  padding: 12px 0;
+}
+
+@media (max-width: 600px) {
+  .form-fields {
+    flex-direction: column;
+  }
+
+  .half-width {
+    flex: 1 1 100%;
+  }
+}

@@ -4,7 +4,7 @@ import { CardFormComponent } from '../components/card-manager/card-form/card-for
 import { CardListComponent } from '../components/card-manager/card-list/card-list.component';
 import { CardManagerComponent } from '../components/card-manager/card-manager.component';
 import { CardList } from '../model/card-list-data';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 interface Feedback {
   type: string;
@@ -24,8 +24,13 @@ export class DashboardComponent {
   showCardList = false;
   cards: CardList[] = [];
 
+  constructor(private router: Router) {}
+
   startTask(taskTitle: string) {
     console.log(`Starting task: ${taskTitle}`);
+    if (taskTitle === 'Loan') {
+      this.router.navigate(['/loan']); // Navigate to loan component
+    }
   }
 
   onFormSubmit(cardListData: CardList) {

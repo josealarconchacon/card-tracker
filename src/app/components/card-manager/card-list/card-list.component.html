@@ -5,8 +5,17 @@
       class="card-item"
     >
       <div class="card-info">
-        <h3>{{ card.cardName }}</h3>
-        <p>Amount Owed: ${{ card.amountOwed | number : "1.2-2" }}</p>
+        <div class="card-details">
+          <div class="card-name-section">
+            <h3>{{ card.cardName }}</h3>
+            <img
+              [src]="card.image"
+              alt="{{ card.cardType }} card"
+              (error)="handleImageError($event)"
+            />
+          </div>
+          <p>Amount Owed: ${{ card.amountOwed | number : "1.2-2" }}</p>
+        </div>
       </div>
       <span *ngIf="card.amountOwed === 0" class="paid-off-cross">✔</span>
       <button class="detail-button" (click)="onDetailClick(card)">

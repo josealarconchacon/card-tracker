@@ -2,6 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { CardList } from '../../../model/card-list-data';
 import { CommonModule } from '@angular/common';
 import { CardDetailComponent } from '../card-detail/card-detail.component';
+import { CardDetectorService } from '../../../service/card-detector.service';
+
 @Component({
   selector: 'app-card-list',
   standalone: true,
@@ -15,26 +17,21 @@ export class CardListComponent implements OnInit {
   currentPage = 1;
   itemsPerPage = 3;
 
+  constructor(private cardDetectorService: CardDetectorService) {}
+
   ngOnInit() {
-    // new method
     this.cards.forEach((card) => {
-      if (card.paymentDueDate) {
-        this.showDueReminder(card);
-      }
+      const cardNumber = card.cardNumber || '';
+      const cardInfo = this.cardDetectorService.detectCardType(cardNumber);
+      console.log('Detected Card Info:', cardInfo);
+      card.image = cardInfo.image;
+      card.cardType = cardInfo.type;
     });
   }
 
-  // Show a reminder if payment is due tomorrow
-  showDueReminder(card: CardList) {
-    // new method
-    const dueDate = card.paymentDueDate ? new Date(card.paymentDueDate) : null;
-    const today = new Date();
-    const tomorrow = new Date();
-    tomorrow.setDate(today.getDate() + 1);
-
-    if (dueDate && dueDate.toDateString() === tomorrow.toDateString()) {
-      alert(`Reminder: Your payment for ${card.cardName} is due tomorrow!`);
-    }
+  handleImageError(event: any) {
+    console.error('Image failed to load:', event.target.src);
+    event.target.src = 'assets/cards/unknown.png';
   }
 
   get paginatedCards() {
@@ -62,6 +59,7 @@ export class CardListComponent implements OnInit {
       this.currentPage = page;
     }
   }
+
   onDetailClick(card: CardList) {
     this.selectedCard = card;
   }
@@ -69,6 +67,7 @@ export class CardListComponent implements OnInit {
   closeDetail() {
     this.selectedCard = null;
   }
+
   handleDeleteCard(cardId: number) {
     this.cards = this.cards.filter((card) => card.id !== cardId);
     if (this.paginatedCards.length === 0 && this.currentPage > 1) {

@@ -1,0 +1,280 @@
+.loan-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.header-section {
+  margin-bottom: 2rem;
+
+  .main-heading {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1a1f36;
+    margin-bottom: 0.5rem;
+  }
+
+  .subtitle {
+    color: #6b7280;
+    font-size: 1rem;
+  }
+}
+
+.loan-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.loan-option {
+  position: relative;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  transition: all 0.2s ease;
+
+  &:hover,
+  &.selected {
+    border-color: #2563eb;
+
+    .chevron-right {
+      opacity: 1;
+    }
+
+    .highlight-bar {
+      transform: scaleX(1);
+    }
+  }
+
+  .loan-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .loan-icon {
+    font-size: 1.5rem;
+  }
+
+  .loan-details {
+    flex: 1;
+  }
+
+  .loan-name {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #1a1f36;
+    margin-bottom: 0.25rem;
+  }
+
+  .loan-description {
+    font-size: 0.875rem;
+    color: #6b7280;
+  }
+
+  .chevron-right {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    &::after {
+      content: "›";
+      color: #2563eb;
+      font-size: 1.5rem;
+    }
+  }
+
+  .highlight-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: #2563eb;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.2s ease;
+  }
+}
+
+.info-section {
+  background-color: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+
+  .info-heading {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #1a1f36;
+    margin-bottom: 1rem;
+  }
+
+  .benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .benefit {
+    .benefit-title {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: #374151;
+      margin-bottom: 0.25rem;
+    }
+
+    .benefit-description {
+      font-size: 0.875rem;
+      color: #6b7280;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .loan-container {
+    padding: 1rem;
+  }
+
+  .loan-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .benefits-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.side-panel-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 998;
+}
+
+.side-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  max-width: 880px;
+  height: 100%;
+  background-color: white;
+  box-shadow: -4px 0 8px rgba(0, 0, 0, 0.1);
+  z-index: 999;
+  overflow-y: auto;
+
+  .side-panel-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid #e5e7eb;
+    position: relative;
+
+    .close-button {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-size: 1.5rem;
+      color: #6b7280;
+      border: none;
+      background: none;
+      cursor: pointer;
+      padding: 0.5rem;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.2s ease;
+
+      &:hover {
+        background-color: #f3f4f6;
+      }
+    }
+
+    .panel-loan-info {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+
+      .panel-loan-icon {
+        font-size: 2rem;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #1a1f36;
+        margin: 0;
+      }
+    }
+  }
+
+  .side-panel-content {
+    padding: 1.5rem;
+
+    .loan-detail-section {
+      margin-bottom: 2rem;
+
+      h3 {
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: #1a1f36;
+        margin-bottom: 0.75rem;
+      }
+
+      p {
+        color: #6b7280;
+        margin-bottom: 0.5rem;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        li {
+          color: #6b7280;
+          padding: 0.5rem 0;
+          padding-left: 1.5rem;
+          position: relative;
+
+          &:before {
+            content: "✓";
+            color: #2563eb;
+            position: absolute;
+            left: 0;
+          }
+        }
+      }
+    }
+
+    .apply-button {
+      width: 100%;
+      padding: 1rem;
+      background-color: #2563eb;
+      color: white;
+      border: none;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+
+      &:hover {
+        background-color: #1d4ed8;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .side-panel {
+    max-width: 100%;
+  }
+}
